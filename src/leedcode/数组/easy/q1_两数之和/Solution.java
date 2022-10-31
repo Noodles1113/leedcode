@@ -1,11 +1,11 @@
-package leedcode.数组.q1_两数之和;
+package leedcode.数组.easy.q1_两数之和;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
 
-    // 暴力破解 n*(n-1)/2
+    // 双重for循环 暴力破解 n*(n-1)/2
     public static int[] twoSum(int[] nums, int target) {
         int[] result = new int[2];
         for (int i = 0; i < nums.length; i++) {
