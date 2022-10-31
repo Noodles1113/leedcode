@@ -1,35 +1,11 @@
 package leedcode.两周数据结构入门.day03.q350_两个数组的交集2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
 
+    // 排序后使用双指针
     public static int[] intersect(int[] nums1, int[] nums2) {
-        if (nums1.length > nums2.length) {
-            return intersect(nums2,nums1);
-        }
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < nums1.length; i++) {
-            for (int i1 = 0; i1 < nums2.length; i1++) {
-                if (nums1[i] == nums2[i1]) {
-                    list.add(nums1[i]);
-                    break;
-                }
-            }
-        }
-
-        int[] result = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            result[i] = list.get(i);
-        }
-        return result;
-    }
-
-    public static int[] intersect2(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         int length1 = nums1.length, length2 = nums2.length;
@@ -50,13 +26,35 @@ public class Solution {
         return Arrays.copyOfRange(intersection, 0, index);
     }
 
+    // 哈希记录重复次数 然后循环另一个数组
+    public static int[] intersect2(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return intersect2(nums2,nums1);
+        }
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int num : nums1) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int[] res = new int[nums1.length];
+        int index = 0;
+        for(int num : nums2) {
+            if(map.containsKey(num) && map.get(num) > 0) {
+                res[index++] = num;
+                map.put(num, map.get(num) - 1);
+            }
+        }
+        return Arrays.copyOfRange(res, 0, index);
+    }
+
 
     public static void main(String[] args) {
 //        int[] nums1 = new int[] {1,1,2,3,1,5};
 //        int[] nums2 = new int[] {1,1,2,4};
         int[] nums1 = new int[] {3,2,1};
-        int[] nums2 = new int[] {1,1};
-        for (int i : intersect(nums1, nums2)) {
+        int[] nums2 = new int[] {1,2,3,4};
+        for (int i : intersect2(nums1, nums2)) {
             System.out.println(i);
         }
     }

@@ -1,9 +1,9 @@
-package leedcode.数组.q26_删除有序数组中的重复项;
+package leedcode.数组.easy.q26_删除有序数组中的重复项;
 
 public class Solution {
 
+    // 使用双指针
     public static int removeDuplicates(int[] nums) {
-        // 使用双指针
         if (nums.length <= 1) {
             return nums.length;
         }
@@ -22,21 +22,21 @@ public class Solution {
         if (nums.length <= 1) {
             return nums.length;
         }
-        int fast = 1, slow = 1; // 删除重复元素之后也至少剩下一个元素
+        int fast = 1, slow = 1;
         while (fast < nums.length) {
-            if (nums[fast] != nums[slow - 1]) { // 说明nums[fast] 和之前的元素都不同
-                nums[slow] = nums[fast];        // nums[fast] 的值复制到 nums[slow]
+            if (nums[fast] != nums[slow - 1]) {
+                nums[slow] = nums[fast];
                 ++slow;
             }
             ++fast;
         }
-        return slow; // 从nums[0]到nums[slow−1]的每个元素都不相同
+        return slow;
     }
 
 
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 1, 1,1,1,1, 2, 2, 3, 4, 5, 5};
+        int[] nums = new int[]{1, 1, 1, 1, 1, 1, 2, 2, 3, 4, 5, 5};
 //        int[] nums = new int[]{1,2,3,4,5};
-        System.out.println(removeDuplicates2(nums));
+        System.out.println(removeDuplicates(nums));
     }
 }
