@@ -1,4 +1,4 @@
-package leedcode.两周数据结构入门.day03.q350_两个数组的交集2;
+package leedcode.数据结构.day03.q350_两个数组的交集2;
 
 import java.util.*;
 
