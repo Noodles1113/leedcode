@@ -1,4 +1,4 @@
-package leedcode.两周数据结构入门.day02.q88_合并两个有序数组;
+package leedcode.两周数据结构.day02.q88_合并两个有序数组;
 
 public class Solution {
 
