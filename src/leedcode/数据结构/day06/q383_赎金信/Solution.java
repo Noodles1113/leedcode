@@ -1,4 +1,4 @@
-package leedcode.两周数据结构.day06.q383_赎金信;
+package leedcode.数据结构.day06.q383_赎金信;
 
 public class Solution {
     public static boolean canConstruct(String ransomNote, String magazine) {
