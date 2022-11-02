@@ -1,8 +1,6 @@
 package leedcode.数组.easy.寻找无序数组的重复项最多的元素值;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Solution {
 
@@ -48,9 +46,32 @@ public class Solution {
         return result;
     }
 
+
+    public static int find3(int[] arr) {
+        int currentLength = 0;
+        int slow = 0;
+        int fast = 0;
+        int maxLength = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[fast] == 1) {
+                currentLength = fast - slow + 1;
+                maxLength = Math.max(currentLength, maxLength);
+                fast++;
+            } else {
+                fast++;
+                slow = fast;
+            }
+        }
+        return maxLength;
+    }
+
+
+
     public static void main(String[] args) {
-        int[] arr = {1, -2, 3, 5, 5, 3, 4, 5, 5, 22, 2, 2, 2, 2, 89, 11, 2, 2, 2, 2, 5};
-        System.out.println(find1(arr));
-        System.out.println(find2(arr));
+//        int[] arr = {1, -2, 3, 5, 5, 3, 4, 5, 5, 22, 2, 2, 2, 2, 89, 11, 2, 2, 2, 2, 5};
+//        System.out.println(find1(arr));
+//        System.out.println(find2(arr));
+//        int[] arr = {1, 1, 0, 1, 1,1};
     }
 }
