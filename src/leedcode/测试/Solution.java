@@ -26,10 +26,12 @@ public class Solution {
         // 寻找度=?
         // 长度=(最后一次出现度的i-最初出现度的i)+1
         int n = nums.length;
-        List<Integer> list = findDuList(nums, n);
+        if(n == 1) return 1;
+        List<Integer> list = new ArrayList<>();
+        list = findDuList(nums, n,list);
         int s = 0;
         int e = 0;
-        int min = 0;
+        int min = nums.length;
         for (int k = 0; k < list.size(); k++) {
             for (int i = 0; i < n; i++) {
                 if (list.get(k) == nums[i]) {
@@ -49,15 +51,14 @@ public class Solution {
         return min;
     }
 
-    public static List<Integer> findDuList(int[] nums, int n) {
+    public static List<Integer> findDuList(int[] nums, int n,List<Integer> list) {
         int max = 0;
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            map.put(nums[i],0);
-            int cur = map.getOrDefault(nums[i], 0) + 1;
-            max = Math.max(max, cur);
+            int cur = nums[i];
+            map.put(cur,map.getOrDefault(cur,0)+1);
+            max = Math.max(map.get(cur),max);
         }
-        List<Integer> list = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             if (entry.getValue() == max) {
                 list.add(entry.getKey());
@@ -66,9 +67,24 @@ public class Solution {
         return list;
     }
 
+    public static List<Integer> findDuplicates(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int n = nums.length;
+        List<Integer> res = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == 2) {
+                res.add(entry.getKey());
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        int[] nums = {1, 2, 2, 3, 1};
-        System.out.println(findShortestSubArray(nums));
+        int[] nums = {4,3,2,7,8,2,3,1};
+        System.out.println(findDuplicates(nums));
 
     }
 }
